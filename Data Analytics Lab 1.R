@@ -104,5 +104,44 @@ hist(epi$DALY,seq(0,95,1),main='Histogram of DALY', prob=TRUE)
 lines(density(epi$DALY,na.rm=TRUE,bw='SJ'))
 rug(epi$DALY)
 
+plot(ecdf(epi$DALY),do.points=FALSE,verticals=TRUE)
 
+par(pty='s')
+qqnorm(epi$DALY);qqline(epi$DALY)
 
+qqplot(qt(ppoints(250),df=5),x,xlab='Q-Q Plot for t dsn')
+qqline(x)
+
+tf=is.na(epi$AIR_H)
+E2=EPI[!tf]
+summary(E2)
+
+summary(epi$AIR_H)
+fivenum(epi$AIR_H,na.rm=TRUE)
+stem(epi$AIR_H)
+hist(epi$AIR_H)
+hist(epi$AIR_H,seq(0,100,1),main='Histogram of AIR_H', prob=TRUE)
+lines(density(epi$AIR_H,na.rm=TRUE,bw='SJ'))
+rug(epi$AIR_H)
+
+plot(ecdf(epi$AIR_H),do.points=FALSE,verticals=TRUE)
+
+par(pty='s')
+qqnorm(epi$AIR_H);qqline(epi$AIR_H)
+
+qqplot(qt(ppoints(250),df=5),x,xlab='Q-Q Plot for t dsn')
+qqline(x)
+boxplot(EPI,DALY,epi$AIR_H)
+
+boxplot(EPI,DALY,epi$ENVHEALTH,epi$ECOSYSTEM,epi$AIR_H,epi$WATER_H,epi$AIR_EWATER_E,epi$BIODIVERSITY)
+
+#Filtering exercise
+epiland=epi[!epi$Landlock]
+eland=epiland[!is.na(epiland)]
+hist(eland)
+hist(eland,seq(30,95,1.0),prob=TRUE)
+
+#How to filter on regions
+EPI_South_Asia=epi[epi$EPI_regions]
+EPI_South_Asia2=EPI_South_Asia[epi$EPI_regions=='South Asia']
+EPI_South_Asia2
