@@ -95,4 +95,67 @@ abline(mm,col=2,lwd=3)
 
 newimmigrantdata=data.frame(Immigrant=c(0,20))
 mm %>% predict(newimmigrantdata)
+#I cannot figure out why R will not recognize %>% as a function
 
+abline(mm)
+abline(mm,col=3,lwd=3)
+
+attributes(mm)
+mm$coefficients
+
+#Creating Plots
+plot(mtcars$wt,mtcars$mpg)
+
+library(ggplot2)
+qplot(mtcars$wt,mtcars$mpg)
+qplot(wt,mpg,data=mtcars)
+#Both are the same
+
+ggplot(mtcars,aes(x=wt,y=mpg))+geom_point()
+
+#Both of these look the same
+plot(pressure$temperature,pressure$presssure,type='l')
+points(pressure$temperature,pressure$pressure)
+
+lines(pressure$temperature,pressure$pressure/2,col='red')
+points(pressure$temperature,pressure$pressure/2,col='blue')
+
+qplot(pressure$temperature,pressure$pressure,geom='line')
+qplot(temperature,pressure,data=pressure,geom='line')
+
+ggplot(pressure,aes(x=temperature,y=pressure))+geom_line()+geom_point()
+
+#Creating bar graphs
+barplot(BOD$demand,names.org=BOD$Time)
+table(mtcars$cyl)
+
+#Generate table of counts
+barplot(table(mtcars$cyl))
+
+#Cyl is continuous here
+qplot(mtcars$cyl)
+
+#Treat cyl as discrete
+qplot(factor(mtcars$cyl))
+
+#Bar graph of counts
+qplot(factor(cyl),data=mtcars)
+ggplot(mtcars,aes(x=factor(cyl)))+geom_bar()
+
+#Create histograms
+hist(mtcars$mpg)
+#Change sizes of bins
+hist(mtcars$mpg,breaks=10)
+hist(mtcars$mpg,breaks=5)
+hist(mtcars$mpg,breaks=12)
+
+qplot(mpg,data=mtcars,binwidth=4)
+ggplot(mtcars,aes(x=mpg))+geom_histogram(binwidth=4)
+ggplot(mtcars,aes(x=mpg))+geom_histogram(binwidth=5)
+
+#Create box plots
+(plot(ToothGrowth$supp,ToothGrowth$len))
+
+boxplot(len~supp,data=ToothGrowth)
+
+ggplot(ToothGrowth,aes(x=supp,y=len))+geom_boxplot()
